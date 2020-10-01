@@ -1,0 +1,10 @@
+test_dictionary_from_lists (__main__.TestExercice) ... ok
+test_get_even_keys (__main__.TestExercice) ... ok
+test_get_greatest_values (__main__.TestExercice) ... ok
+test_get_sum_values_from_key (__main__.TestExercice) ... ok
+test_join_dictionaries (__main__.TestExercice) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK

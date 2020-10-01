@@ -8,20 +8,52 @@ import itertools
 
 
 def get_even_keys(dictionary):
-	return {}
+	# result = set({})
+	# for key, value in dictionary.items():
+	# 	if key % 2 == 0:
+	# 		result.add(key)
+	# return result
+	# return {k for k, v in dictionary.items() if k % 2 == 0}  # Compréhension de dictionaire :)
+	return {k for k in dictionary.keys() if k % 2 == 0} # En utilisant une fonction plus smart :)
 
 def join_dictionaries(dictionaries):
-	return {}
+	# joined_dictionaries = {}
+	# for dictionary in dictionaries:
+	# 	for k, v in dictionary.items():
+	# 		joined_dictionaries[k] = v
+	# return joined_dictionaries
+	#
+	# result = {}
+	# for d in dictionaries:
+	# 	result.update(d)  # big brain move right there.
+	# return result
+	#
+	return {key: value for dictionary in dictionaries for key, value in dictionary.items()} 
 
 def dictionary_from_lists(keys, values):
-	return {}
+	# return {keys[i]: values[i] for i in range(min(len(keys), len(values)))} # Big brain le prof, ce que j'ai fait marchait pas.
+	return dict(zip(keys, values)) # Even bigger brain, usage of zip()
 
-def get_greatest_values(dictionnary, num_values):
-	return []
+def get_greatest_values(dictionary, num_values):
+	# liste = []
+	# # On sort les values du dictionaire et on les met dans une liste
+	# for value in dictionary.values():
+	# 	liste.append(value)
+	# # On arrange la liste pour qu'elle donne du plus grand au plus petit.
+	# liste.sort(reverse = True)
+	# # On crée result tel que result va juste avoir num_values éléments dedans.
+	# result = liste[:num_values]
 
-def get_sum_values_from_key(dictionnaries, key):
-	return 0
+	# return result
+	return sorted(dictionary.values(), reverse=True)[0:num_values]
 
+def get_sum_values_from_key(dictionaries, key):
+	# total = 0
+	# for dic in dictionaries:
+	# 	if key in dic:
+	# 		total += dic[key]
+	# return total
+	return sum([dic[key] for dic in dictionaries if key in dic])
 
 if __name__ == "__main__":
 	yeet = {
