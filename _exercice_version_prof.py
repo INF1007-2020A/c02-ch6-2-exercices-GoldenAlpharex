@@ -7,60 +7,120 @@ import copy
 import itertools
 
 
-def get_maximums(numbers):
-	return [max(elem) for elem in numbers]
+def get_even_keys(dictionary):
+	# Extraire les clés
+	# Extraire les clés paires
+	return {k for k in dictionary.keys() if k % 2 == 0}
 
-def join_integers(numbers):
-	return int("".join([str(elem) for elem in numbers]))
+def join_dictionaries(dictionaries):
+	return {
+		key: value
+			for d in dictionaries
+				for key, value in d.items()
+	}
 
-# FONCTION Eratosthène(limite)
-def generate_prime_numbers(limit):
- #   premiers = liste vide
-	premiers = []
- #   nombres = liste des entiers de 2 à limite
-	nombres = [i for i in range(2, limit+1)]
- #   TANT QUE nombres est non vide FAIRE
-	while len(nombres) != 0:
- #       Ajouter à premiers le premier entier de nombres
-		premiers.append(nombres[0])
- #       nombres = liste des entiers de nombres non multiples du premier
-		nombres = [elem for elem in nombres if elem % nombres[0] != 0]
- #   RÉSULTAT premiers
-	return premiers
+def dictionary_from_lists(keys, values):
+	# Associer les clés et les valeurs.
+	# S'arrêter à la fin de la plus petite des deux listes.
+	#result = {}
+	#for i in range(min(len(keys), len(values))):
+	#	result[keys[i]] = values[i]
+	#return result
+	#return {keys[i]: values[i] for i in range(min(len(keys), len(values)))}
+	return dict(zip(keys, values))
 
-def combine_strings_and_numbers(strings, num_combinations, excluded_multiples):
-	return [string + str(i) for i in range(1, num_combinations+1) if excluded_multiples is None or i % excluded_multiples != 0 for string in strings]
+def get_greatest_values(dictionary, num_values):
+	# Extraire les valeurs
+	#vals = list(dictionary.values())
+	# Ordonner les valeurs
+	#vals = sorted(vals, reverse=True)
+	# Choisir les num_values plus grands
+	return sorted(dictionary.values(), reverse=True)[0:num_values]
 
-	return [
-		string + str(i)
-			for i in range(1, num_combinations+1)
-			if excluded_multiples is None or i % excluded_multiples != 0
-				for string in strings
-	]
+def get_sum_values_from_key(dictionaries, key):
+	# Extraire les valeurs associés à une clé
+	# Faire la somme des valeurs
+	#values = []
+	#for d in dictionaries:
+	#	if key in d:
+	#		values.append(d[key])
+	return sum([d[key] for d in dictionaries if key in d])
 
-	# Approche par boucle classiques
-	#result = []
-	# Pour chaque entier dans la liste de nombre
-	#for i in range(1, num_combinations+1):
-	#	# Si l'entier n'est pas un multiple de excluded_multiples
-	#	if excluded_multiples is None or i % excluded_multiples != 0:
-	#		# Pour chaque string dans strings
-	#		for string in strings:
-	#			# Concaténer la string et le nombre
-	#			# Ajouter ça à la liste de résultat
-	#			result.append(string + str(i))
-	#		# Compréhension de liste intermédiaire
-	#		result += [string + str(i) for string in strings]
-	## Retourner le résultat
-	##return result
 
 if __name__ == "__main__":
-	print(get_maximums([[1,2,3], [6,5,4], [10,11,12], [8,9,7]]))
-	print("")
-	print(join_integers([111, 222, 333]))
-	print(join_integers([69, 420]))
-	print("")
-	print(generate_prime_numbers(17))
-	print("")
-	print(combine_strings_and_numbers(["A", "B"], 2, None))
-	print(combine_strings_and_numbers(["A", "B"], 5, 2))
+	yeet = {
+		69: "Yeet",
+		420: "YeEt",
+		9000: "YEET",
+	}
+	print(get_even_keys(yeet))
+	print()
+
+	yeet = {
+		69: "Yeet",
+		420: "YeEt",
+		9000: "YEET",
+	}
+	doot = {
+		0xBEEF: "doot",
+		0xDEAD: "DOOT",
+		0xBABE: "dOoT"
+	}
+	print(join_dictionaries([yeet, doot]))
+	print()
+	
+	doh = [
+		"D'OH!",
+		"d'oh",
+		"DOH!"
+	]
+	nice = [
+		"NICE!",
+		"nice",
+		"nIcE",
+		"NAIIIIICE!"
+	]
+	print(dictionary_from_lists(doh, nice))
+	print()
+	
+	nums = {
+		"nice": 69,
+		"nice bro": 69420,
+		"AGH!": 9000,
+		"dude": 420,
+		"git gud": 1337
+	}
+	print(get_greatest_values(nums, 1))
+	print(get_greatest_values(nums, 3))
+	print()
+
+	bro1 = {
+		"money": 12,
+		"problems": 14,
+		"trivago": 1
+	}
+	bro2 = {
+		"money": 56,
+		"problems": 406
+	}
+	bro3 = {
+		"money": 1,
+		"chichis": 1,
+		"power-level": 9000
+	}
+	print(get_sum_values_from_key([bro1, bro2, bro3], "problems"))
+	print(get_sum_values_from_key([bro1, bro2, bro3], "money"))
+	print()
+
+	print("-" * 40)
+	print()
+	a = ("John", "Charles", "Mike")
+	b = ["Jenny", "Christy", "Monica"]
+	c = {"Mélissa", "Véronique", "Julie"}
+	for ai, bi, ci in zip(a, b, c):
+		print(f"{ai}, {bi}, {ci}")
+	#for z in zip(a, b, c):
+	#	for elem in z:
+	#		print(f"{elem} ", end="")
+	#	print()
+
